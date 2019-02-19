@@ -9,7 +9,6 @@ class CommandLine
   end
 
   def not_three_arguments
-  # *** return?
     return 1 if ARGV.length != 3
   end
 
@@ -20,16 +19,16 @@ class CommandLine
   def negative_integers
     return 1 if !/\A\d+\z/.match(ARGV[1]) || !/\A\d+\z/.match(ARGV[2])
   end
-  
+
   def seed
-    return ARGV[0].to_i
+    ARGV[0].to_i
   end
-  
+
   def number_of_prospectors
-    return ARGV[1].to_i
+    ARGV[1].to_i
   end
-  
+
   def number_of_turns
-    return ARGV[2].to_i
+    ARGV[2].to_i
   end
 end
