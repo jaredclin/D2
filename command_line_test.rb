@@ -25,7 +25,7 @@ class CommandLineTest < Minitest::Test
 
   # if array length is 3, no error is reported
   def test_initialize_three_arguments
-    refute_raises 'CountError' do
+    !assert_raises 'CountError' do
       CommandLine.return_values(['1', '2', '3'])
     end
   end
@@ -37,14 +37,14 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_seed
-    refute_raises 'SeedError' do
+    !assert_raises 'SeedError' do
       CommandLine.return_values(['1', '1', '1'])
     end
   end
 
   # if x is a negative integer, no error is reported
   def test_initialize_negative_seed
-    refute_raises 'SeedError' do
+    !assert_raises 'SeedError' do
       CommandLine.return_values(['-1', '1', '1'])
     end
   end
@@ -65,7 +65,7 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_num_prospectors
-    refute_raises 'NumProspectorError' do
+    !assert_raises 'NumProspectorError' do
       CommandLine.return_values(['1', '1', '1'])
     end
   end
@@ -73,7 +73,7 @@ class CommandLineTest < Minitest::Test
   # if x is 0, no error is reported
   # EDGE CASE
   def test_initialize_zero_num_prospectors
-    refute_raises 'NumProspectorError' do
+    !assert_raises 'NumProspectorError' do
       CommandLine.return_values(['1', '0', '1'])
     end
   end
@@ -101,7 +101,7 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_num_turns
-    refute_raises 'NumTurnsError' do
+    !assert_raises 'NumTurnsError' do
       CommandLine.return_values(['1', '1', '1'])
     end
   end
@@ -109,7 +109,7 @@ class CommandLineTest < Minitest::Test
   # if x is 0, no error is reported
   # EDGE CASE
   def test_initialize_zero_num_turns
-    refute_raises 'NumTurnsError' do
+    !assert_raises 'NumTurnsError' do
       CommandLine.return_values(['1', '1', '0'])
     end
   end
