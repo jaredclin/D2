@@ -19,33 +19,33 @@ class CommandLineTest < Minitest::Test
   # if array length is not 3, CountError is reported
   def test_initialize_two_arguments
     assert_raises 'CountError' do
-      CommandLine.new(['1', '2'])
+      CommandLine.return_values(['1', '2'])
     end
   end
 
   # if array length is 3, no error is reported
   def test_initialize_three_arguments
-    !assert_raises 'CountError' do
-      CommandLine.new(['1', '2', '3'])
+    refute_raises 'CountError' do
+      CommandLine.return_values(['1', '2', '3'])
     end
   end
 
-  # UNIT TESTS FOR Seed Check
+  # UNIT TESTS FOR Seed
   # Equivalence classes:
   # x = int -> valid
   # x != int -> invalid
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['1', '1', '1'])
+    refute_raises 'SeedError' do
+      CommandLine.return_values(['1', '1', '1'])
     end
   end
 
   # if x is a negative integer, no error is reported
   def test_initialize_negative_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['-1', '1', '1'])
+    refute_raises 'SeedError' do
+      CommandLine.return_values(['-1', '1', '1'])
     end
   end
 
@@ -53,61 +53,79 @@ class CommandLineTest < Minitest::Test
   # EDGE CASE
   def test_initialize_non_integer_seed
     assert_raises 'SeedError' do
-      CommandLine.new(['one', '1', '1'])
+      CommandLine.return_values(['one', '1', '1'])
     end
   end
 
-  # UNIT TESTS FOR Seed Check
+  # UNIT TESTS FOR Num_prospectors
   # Equivalence classes:
-  # x = int -> valid
+  # x >= 0 -> valid
+  # x < 0 -> invalid
   # x != int -> invalid
 
   # if x is a positive integer, no error is reported
-  def test_initialize_positive_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['1', '1', '1'])
+  def test_initialize_positive_num_prospectors
+    refute_raises 'NumProspectorError' do
+      CommandLine.return_values(['1', '1', '1'])
     end
   end
 
-  # if x is a negative integer, no error is reported
-  def test_initialize_negative_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['-1', '1', '1'])
-    end
-  end
-
-  # if an invalid value, such as a string, is given for x, SeedError is reported
+  # if x is 0, no error is reported
   # EDGE CASE
-  def test_initialize_non_integer_seed
-    assert_raises 'SeedError' do
-      CommandLine.new(['one', '1', '1'])
+  def test_initialize_zero_num_prospectors
+    refute_raises 'NumProspectorError' do
+      CommandLine.return_values(['1', '0', '1'])
     end
   end
 
-  # UNIT TESTS FOR Seed Check
+  # if x is a negative integer, NumProspectorError is reported
+  def test_initialize_negative_num_prospectors
+    assert_raises 'NumProspectorError' do
+      CommandLine.return_values(['1', '-1', '1'])
+    end
+  end
+
+  # if an invalid value, such as a string, is given for x, NumProspectorError is reported
+  # EDGE CASE
+  def test_initialize_non_integer_num_prospectors
+    assert_raises 'NumProspectorError' do
+      CommandLine.return_values(['1', 'one', '1'])
+    end
+  end
+
+  # UNIT TESTS FOR Num_turns
   # Equivalence classes:
-  # x = int -> valid
+  # x >= 0 -> valid
+  # x < 0 -> invalid
   # x != int -> invalid
 
   # if x is a positive integer, no error is reported
-  def test_initialize_positive_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['1', '1', '1'])
+  def test_initialize_positive_num_turns
+    refute_raises 'NumTurnsError' do
+      CommandLine.return_values(['1', '1', '1'])
     end
   end
 
-  # if x is a negative integer, no error is reported
-  def test_initialize_negative_seed
-    !assert_raises 'SeedError' do
-      CommandLine.new(['-1', '1', '1'])
-    end
-  end
-
-  # if an invalid value, such as a string, is given for x, SeedError is reported
+  # if x is 0, no error is reported
   # EDGE CASE
-  def test_initialize_non_integer_seed
-    assert_raises 'SeedError' do
-      CommandLine.new(['one', '1', '1'])
+  def test_initialize_zero_num_turns
+    refute_raises 'NumTurnsError' do
+      CommandLine.return_values(['1', '1', '0'])
+    end
+  end
+
+  # if x is a negative integer, NumProspectorError is reported
+  def test_initialize_negative_num_turns
+    assert_raises 'NumTurnsError' do
+      CommandLine.return_values(['1', '1', '-1'])
+    end
+  end
+
+  # if an invalid value, such as a string, is given for x, NumProspectorError is reported
+  # EDGE CASE
+  def test_initialize_non_integer_num_turns
+    assert_raises 'NumTurnsError' do
+      CommandLine.return_values(['1', '1', 'one'])
     end
   end
 end

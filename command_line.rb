@@ -1,6 +1,6 @@
 # Class to confirm that command line arguments are valid
 class CommandLine
-  def self.initialize(arr)
+  def self.return_values(arr)
     raise 'CountError' if arr.count != 3
 
     seed, num_prospectors, num_turns = arr
@@ -9,7 +9,7 @@ class CommandLine
 
     raise 'NumProspectorError' unless /\A\d+\z/=~num_prospectors
 
-    raise 'NumTurns Error' unless /\A\d+\z/=~num_turns
+    raise 'NumTurnsError' unless /\A\d+\z/=~num_turns
 
     [seed.to_i, num_prospectors.to_i, num_turns.to_i]
   end
