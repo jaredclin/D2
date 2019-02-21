@@ -38,18 +38,14 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_seed
-    a, b, c = CommandLine.return_values(['1', '2', '3'])
+    a, _, _ = CommandLine.return_values(['1', '2', '3'])
     assert_equal 1, a
-    assert_equal 2, b
-    assert_equal 3, c
   end
 
   # if x is a negative integer, no error is reported
   def test_initialize_negative_seed
-    a, b, c = CommandLine.return_values(['-1', '2', '3'])
+    a, _, _ = CommandLine.return_values(['-1', '2', '3'])
     assert_equal -1, a
-    assert_equal 2, b
-    assert_equal 3, c
   end
 
   # if an invalid value, such as a string, is given for x, SeedError is reported
@@ -68,19 +64,15 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_num_prospectors
-    a, b, c = CommandLine.return_values(['1', '2', '3'])
-    assert_equal 1, a
+    _, b, _ = CommandLine.return_values(['1', '2', '3'])
     assert_equal 2, b
-    assert_equal 3, c
   end
 
   # if x is 0, no error is reported
   # EDGE CASE
   def test_initialize_zero_num_prospectors
-    a, b, c = CommandLine.return_values(['1', '0', '3'])
-    assert_equal 1, a
+    _, b, _ = CommandLine.return_values(['1', '0', '3'])
     assert_equal 0, b
-    assert_equal 3, c
   end
 
   # if x is a negative integer, NumProspectorError is reported
@@ -106,18 +98,14 @@ class CommandLineTest < Minitest::Test
 
   # if x is a positive integer, no error is reported
   def test_initialize_positive_num_turns
-    a, b, c = CommandLine.return_values(['1', '2', '3'])
-    assert_equal 1, a
-    assert_equal 2, b
+    _, _, c = CommandLine.return_values(['1', '2', '3'])
     assert_equal 3, c
   end
 
   # if x is 0, no error is reported
   # EDGE CASE
   def test_initialize_zero_num_turns
-    a, b, c = CommandLine.return_values(['1', '2', '0'])
-    assert_equal 1, a
-    assert_equal 2, b
+    _, _, c = CommandLine.return_values(['1', '2', '0'])
     assert_equal 0, c
   end
 
