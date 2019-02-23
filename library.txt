@@ -1,0 +1,18 @@
+def get_location_name(location_index)
+    name = if location == 0
+              'Enumerable Canyon'
+            elsif location == 1
+              'Duck Type Beach'
+            elsif location == 2
+              'Monkey Patch City'
+            elsif location == 3
+              'Nil Town'
+            elsif location == 4
+              'Matzburg'
+            elsif location == 5
+              'Hash Crossing'
+            elsif location == 6
+              'Dynamic Palisades'
+            end
+    name
+  end

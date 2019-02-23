@@ -9,7 +9,7 @@ class CommandLineTest < Minitest::Test
     assert_output("Usage:\nruby gold_rush.rb *seed* *num_prospectors* *num_turns*\n*seed* should be an integer\n*num_prospectors* should be a non-negative integer\n*num_turns* should be a non-negative integer\n") { CommandLine.report_correct_usage }
   end
 
-  # UNIT TESTS FOR METHOD initialize
+  # UNIT TESTS FOR METHOD return_values
 
   # UNIT TESTS FOR Number Of Inputs
   # Equivalence classes:
