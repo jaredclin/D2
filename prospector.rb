@@ -32,14 +32,9 @@ class Prospector
         next_location = @l.get_next_location(current_location_index)
         turn += 1
       end
-      days_form = if @days == 1
-                    'day'
-                  else
-                    'days'
-                  end
-      puts "After #{@days} #{days_form}, Rubyist #{prospector} found:"
-      puts "\t#{@real_ruby_count} #{form(@real_ruby_count)}."
-      puts "\t#{@fake_ruby_count} #{form(@fake_ruby_count)}."
+      puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector} found:"
+      puts "\t#{@real_ruby_count} #{ruby_form(@real_ruby_count)}."
+      puts "\t#{@fake_ruby_count} #{ruby_form(@fake_ruby_count)}."
       mood(@real_ruby_count)
       prospector += 1
     end
@@ -67,7 +62,15 @@ class Prospector
     end
   end
 
-  def form(num)
+  def day_form(num)
+    if @num == 1
+      'day'
+    else
+      'days'
+    end
+  end
+
+  def ruby_form(num)
     if num == 1
       'ruby'
     else
@@ -88,12 +91,12 @@ class Prospector
     end
 
     if real_rubies.zero? && (fake_rubies != 0)
-      puts "\tFound #{fake_rubies} fake #{form(fake_rubies)} in #{location}."
+      puts "\tFound #{fake_rubies} fake #{ruby_form(fake_rubies)} in #{location}."
       return false
     end
 
     if (real_rubies != 0) && fake_rubies.zero?
-      puts "\tFound #{real_rubies} #{form(real_rubies)} in #{location}."
+      puts "\tFound #{real_rubies} #{ruby_form(real_rubies)} in #{location}."
       return false
     end
 
@@ -101,6 +104,6 @@ class Prospector
     # wont return true of false, is that an issue?
     return unless (real_rubies != 0) && (fake_rubies != 0)
 
-    puts "\tFound #{real_rubies} #{form(real_rubies)} and #{fake_rubies} fake #{form(fake_rubies)} in #{location}."
+    puts "\tFound #{real_rubies} #{ruby_form(real_rubies)} and #{fake_rubies} fake #{ruby_form(fake_rubies)} in #{location}."
   end
 end
