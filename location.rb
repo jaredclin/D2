@@ -58,7 +58,7 @@ class Location
 
   def get_next_location(current_location)
     range = @map[current_location].length
-    next_location_index = @rng.rand(1..range)
+    next_location_index = @rng.rand(1..range-1)
     next_location = @map[current_location][next_location_index]
     next_location
   end
