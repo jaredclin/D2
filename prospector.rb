@@ -43,7 +43,7 @@ class Prospector
   # and run each individual prospector through.
   # See ruby_rush.rb line 14
   
-  def run_one_iteration prospector_num, prng, num_turns
+  def run_one_iteration prospector_num, num_turns
     # This can be sprouted out into an "initial_vals" function or something
     # first location
     turn = initial_vals
@@ -80,7 +80,7 @@ class Prospector
   end
 
   def day_form(num)
-    if @num == 1
+    if num == 1
       'day'
     else
       'days'
@@ -101,26 +101,26 @@ class Prospector
     [real_rubies, fake_rubies]
   end
 
-  def print_rubies(real_rubies, fake_rubies, location)
-    if real_rubies.zero? && fake_rubies.zero?
+  def print_rubies(real_ruby, fake_ruby, location)
+    if real_ruby.zero? && fake_ruby.zero?
       puts "\tFound no rubies or fake rubies in #{location}."
       return true
     end
 
-    if real_rubies.zero? && (fake_rubies != 0)
-      puts "\tFound #{fake_rubies} fake #{ruby_form(fake_rubies)} in #{location}."
+    if real_ruby.zero? && (fake_ruby != 0)
+      puts "\tFound #{fake_ruby} fake #{ruby_form(fake_ruby)} in #{location}."
       return false
     end
 
-    if (real_rubies != 0) && fake_rubies.zero?
-      puts "\tFound #{real_rubies} #{ruby_form(real_rubies)} in #{location}."
+    if (real_ruby != 0) && fake_ruby.zero?
+      puts "\tFound #{real_ruby} #{ruby_form(real_ruby)} in #{location}."
       return false
     end
 
     # Guard cause question
     # wont return true of false, is that an issue?
-    return unless (real_rubies != 0) && (fake_rubies != 0)
+    return unless (real_ruby != 0) && (fake_ruby != 0)
 
-    puts "\tFound #{real_rubies} #{ruby_form(real_rubies)} and #{fake_rubies} fake #{ruby_form(fake_rubies)} in #{location}."
+    puts "\tFound #{real_ruby} #{ruby_form(real_ruby)} and #{fake_ruby} fake #{ruby_form(fake_ruby)} in #{location}."
   end
 end
