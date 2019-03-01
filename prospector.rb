@@ -9,35 +9,52 @@ class Prospector
     @l = Location.new(seed)
   end
 
-  def run_program
-    prospector = 1
-    while prospector <= @num_prospectors
-      # first location
-      turn = 1
-      @real_ruby_count = 0
-      @fake_ruby_count = 0
-      @days = 0
-      current_location = 'Enumerable Canyon'
-      current_location_index = @l.get_location_index(current_location)
-      puts "\nRubyist #{prospector} starting in #{current_location}."
-      search(current_location, current_location_index)
+  # I also made some of your vars instance vars
+  def initial_vals
+    turn = 1
+    @real_ruby_count = 0
+    @fake_ruby_count = 0
+    @days = 0
+    
+    @current_location = 'Enumerable Canyon'
+    @current_location_index = @l.get_location_index(current_location)
+    1
+  end
 
-      # starts loop after 1st location
-      next_location = @l.get_next_location(current_location_index)
-      while turn < @num_turns
-        puts "Heading from #{current_location} to #{next_location}."
-        current_location = next_location
-        current_location_index = @l.get_location_index(current_location)
-        search(current_location, current_location_index)
-        next_location = @l.get_next_location(current_location_index)
-        turn += 1
-      end
-      puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector} found:"
-      puts "\t#{@real_ruby_count} #{ruby_form(@real_ruby_count)}."
-      puts "\t#{@fake_ruby_count} #{ruby_form(@fake_ruby_count)}."
-      mood(@real_ruby_count)
-      prospector += 1
+  def go_to_next_location_and_search
+    current_location = next_location
+    current_location_index = @l.get_location_index(current_location)
+    search(current_location, current_location_index)
+    next_location = @l.get_next_location(current_location_index
+                                         
+                                        )
+    next_location
+  end
+
+  def print_output
+    puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector} found:"
+    puts "\t#{@real_ruby_count} #{ruby_form(@real_ruby_count)}."
+    puts "\t#{@fake_ruby_count} #{ruby_form(@fake_ruby_count)}."
+    mood(@real_ruby_count)
+
+  end
+  
+  # You probably want to move the main loop to ruby_rush.rb
+  # and run each individual prospector through.
+  # See ruby_rush.rb line 14
+  
+  def run_one_iteration prospector_num, prng, num_turns
+    # This can be sprouted out into an "initial_vals" function or something
+    # first location
+    turn = initial_vals
+    puts "\nRubyist #{prospector} starting in #{current_location}."
+    next_location = goto_next_location_and_search
+
+    while turn < @num_turns
+      puts "Heading from #{current_location} to #{next_location}."
+      turn += 1
     end
+    print_output
   end
 
   def mood(real_ruby_count)
