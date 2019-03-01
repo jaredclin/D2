@@ -11,50 +11,48 @@ class Prospector
 
   # I also made some of your vars instance vars
   def initial_vals
-    turn = 1
     @real_ruby_count = 0
     @fake_ruby_count = 0
     @days = 0
-    
+
     @current_location = 'Enumerable Canyon'
-    @current_location_index = @l.get_location_index(current_location)
+    @current_location_index = @l.get_location_index(@current_location)
     1
   end
 
-  def go_to_next_location_and_search
+  def go_to_next_location_and_search(next_location)
     current_location = next_location
     current_location_index = @l.get_location_index(current_location)
     search(current_location, current_location_index)
-    next_location = @l.get_next_location(current_location_index
-                                         
-                                        )
-    next_location
+    next_location = @l.get_next_location(current_location_index)
+    [current_location, next_location]
   end
 
-  def print_output
-    puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector} found:"
+  def print_output(prospector_num)
+    puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector_num} found:"
     puts "\t#{@real_ruby_count} #{ruby_form(@real_ruby_count)}."
     puts "\t#{@fake_ruby_count} #{ruby_form(@fake_ruby_count)}."
     mood(@real_ruby_count)
-
   end
-  
+
   # You probably want to move the main loop to ruby_rush.rb
   # and run each individual prospector through.
   # See ruby_rush.rb line 14
-  
-  def run_one_iteration prospector_num, num_turns
+
+  def run_one_iteration(prospector_num, num_turns)
     # This can be sprouted out into an "initial_vals" function or something
     # first location
     turn = initial_vals
-    puts "\nRubyist #{prospector} starting in #{current_location}."
-    next_location = goto_next_location_and_search
+    puts "\nRubyist #{prospector_num} starting in #{@current_location}."
+    current_location, next_location = go_to_next_location_and_search(@current_location)
+    turn += 1
 
-    while turn < @num_turns
+    while turn <= num_turns
       puts "Heading from #{current_location} to #{next_location}."
+      current_location, next_location = go_to_next_location_and_search(next_location)
       turn += 1
     end
-    print_output
+    print_output(prospector_num)
   end
 
   def mood(real_ruby_count)
