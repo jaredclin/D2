@@ -31,7 +31,7 @@ class Prospector
   def print_output(prospector_num)
     puts "After #{@days} #{day_form(@days)}, Rubyist #{prospector_num} found:"
     puts "\t#{@real_ruby_count} #{ruby_form(@real_ruby_count)}."
-    puts "\t#{@fake_ruby_count} #{ruby_form(@fake_ruby_count)}."
+    puts "\t#{@fake_ruby_count} fake #{ruby_form(@fake_ruby_count)}."
     mood(@real_ruby_count)
   end
 
