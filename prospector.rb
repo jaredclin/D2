@@ -9,7 +9,6 @@ class Prospector
     @l = Location.new(seed)
   end
 
-  # I also made some of your vars instance vars
   def initial_vals
     @real_ruby_count = 0
     @fake_ruby_count = 0
@@ -35,13 +34,7 @@ class Prospector
     mood(@real_ruby_count)
   end
 
-  # You probably want to move the main loop to ruby_rush.rb
-  # and run each individual prospector through.
-  # See ruby_rush.rb line 14
-
   def run_one_iteration(prospector_num, num_turns)
-    # This can be sprouted out into an "initial_vals" function or something
-    # first location
     turn = initial_vals
     puts "\nRubyist #{prospector_num} starting in #{@current_location}."
     current_location, next_location = go_to_next_location_and_search(@current_location)
@@ -61,7 +54,7 @@ class Prospector
                   elsif real_ruby_count <= 9 && real_ruby_count >= 1
                     'sad.'
                   elsif real_ruby_count.zero?
-                    'empty-handed'
+                    'empty-handed.'
                   end
     puts "Going home #{mood_string}"
   end
@@ -115,8 +108,6 @@ class Prospector
       return false
     end
 
-    # Guard cause question
-    # wont return true of false, is that an issue?
     return unless (real_ruby != 0) && (fake_ruby != 0)
 
     puts "\tFound #{real_ruby} #{ruby_form(real_ruby)} and #{fake_ruby} fake #{ruby_form(fake_ruby)} in #{location}."

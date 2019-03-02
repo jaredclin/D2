@@ -26,7 +26,6 @@ class Location
     @rubies = [[1, 1], [2, 2], [1, 1], [0, 3], [3, 0], [2, 2], [2, 2]]
   end
 
-  # add input check for methods below
   def get_location_index(location)
     index = if location == 'Enumerable Canyon'
               0
@@ -49,16 +48,22 @@ class Location
   end
 
   def get_real_rubies(location)
+    raise 'IndexError' unless location >= 0 && location <= 6
+
     real_rubies = @rng.rand(0..@rubies[location][0]).to_i
     real_rubies
   end
 
   def get_fake_rubies(location)
+    raise 'IndexError' unless location >= 0 && location <= 6
+
     fake_rubies = @rng.rand(0..@rubies[location][1]).to_i
     fake_rubies
   end
 
   def get_next_location(current_location)
+    raise 'IndexError' unless current_location >= 0 && current_location <= 6
+
     range = @map[current_location].length
     next_location_index = @rng.rand(1..range - 1)
     next_location = @map[current_location][next_location_index]
