@@ -35,12 +35,36 @@ class LocationTest < Minitest::Test
   # Input is a location on the map -> valid
   # Input is not a location on the map -> invalid
   # 0 <= return value <= 6 -> valid
-  # return value > 6 or return value < 0 -> invalid
   def test_get_location_enumerable_canyon
     l = Location.new(0)
     assert_equal 0, l.get_location_index('Enumerable Canyon')
   end
   
+  def test_get_location_duck_type_beach
+    l = Location.new(0)
+    assert_equal 1, l.get_location_index('Duck Type Beach')
+  end
+
+  def test_get_location_monkey_patch_city
+    l = Location.new(0)
+    assert_equal 2, l.get_location_index('Monkey Patch City')
+  end
+
+  def test_get_location_nil_town
+    l = Location.new(0)
+    assert_equal 3, l.get_location_index('Nil Town')
+  end
+
+  def test_get_location_matzburg
+    l = Location.new(0)
+    assert_equal 4, l.get_location_index('Matzburg')
+  end
+
+  def test_get_location_hash_crossing
+    l = Location.new(0)
+    assert_equal 5, l.get_location_index('Hash Crossing')
+  end
+
   def test_get_location_dynamic_palisades
     l = Location.new(0)
     assert_equal 6, l.get_location_index('Dynamic Palisades')
