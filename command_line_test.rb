@@ -5,6 +5,7 @@ require_relative 'command_line'
 class CommandLineTest < Minitest::Test
 
   # UNIT TEST FOR METHOD report_correct_usage
+  # If report_correct_usage is called, output will match the correct usage message specified per the requirements
   def test_report_correct_usage
     assert_output("Usage:\nruby gold_rush.rb *seed* *num_prospectors* *num_turns*\n*seed* should be an integer\n*num_prospectors* should be a non-negative integer\n*num_turns* should be a non-negative integer\n") { CommandLine.report_correct_usage }
   end
