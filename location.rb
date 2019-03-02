@@ -42,6 +42,8 @@ class Location
               5
             elsif location == 'Dynamic Palisades'
               6
+            else
+              raise 'InvalidLocationError'
             end
     index
   end
