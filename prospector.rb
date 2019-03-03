@@ -34,7 +34,12 @@ class Prospector
     mood(@real_ruby_count)
   end
 
+  def num_turns_zero?(num_turns)
+    exit 0 if num_turns.zero?
+  end
+
   def run_one_iteration(prospector_num, num_turns)
+    num_turns_zero?(num_turns)
     turn = initial_vals
     puts "\nRubyist #{prospector_num} starting in #{@current_location}."
     current_location, next_location = go_to_next_location_and_search(@current_location)
