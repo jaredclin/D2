@@ -8,8 +8,9 @@ rescue StandardError
   exit 1
 end
 
+exit 0 if num_turns.zero?
+
 rush = Prospector.new(seed, num_prospectors, num_turns)
-rush.num_turns_zero?(num_turns)
 
 (1..num_prospectors).each do |p|
   rush.run_one_iteration p, num_turns
