@@ -12,6 +12,8 @@ class ProspectorTest < Minitest::Test
     assert_equal 1, turn
   end
 
+  # QUESTION 1 IN EMAIL
+  
   #UNIT TEST FOR METHOD go_to_next_location_and_search
   # method should take in next_location and return updated values of current_location and next_location
   def test_go_to_next_location_and_search
@@ -29,19 +31,30 @@ class ProspectorTest < Minitest::Test
     assert_equal next_location, 'CMU'
   end
 
+  # QUESTION 2 IN EMAIL
+  
   # UNIT TEST FOR METHOD print_output
   # Method uses prospector_num as the Rubyist # when printing
   def test_print_output
     p = Prospector.new(1, 1, 1)
     p.initial_vals
-    days = p.days
     def p.day_form(num); 'days'; end
     def p.ruby_form(num); 'rubies'; end
     def p.mood(real_ruby_count); 1; end
     assert_output ("After 0 days, Rubyist 42 found:\n\t0 rubies.\n\t0 fake rubies.\n") {p.print_output(42) }
   end
 
+  # QUESTION 3 IN EMAL
+  
   # UNIT TEST FOR METHOD run_one_iteration
+  # what am i testing here aaaaa
+  def test_run_one_iteration
+    p = Prospector.new(1, 1, 1)
+    p.initial_vals
+    def p.go_to_next_location_and_search(current_location); ['Enumerable Canyon', 'Pitt']; end
+    def p.print_output(num); 1; end
+    assert_output ("\nRubyist 1 starting in Enumerable Canyon.\nHeading from Enumerable Canyon to Pitt.\n") {p.run_one_iteration(1, 2)}
+  end
 
   # UNIT TEST FOR METHOD mood
   # Equivalence classes:
@@ -68,7 +81,20 @@ class ProspectorTest < Minitest::Test
     assert_output ("Going home empty-handed.\n") {p.mood(0) }
   end
 
+  # QUESTION 4 IN EMAIL
+  
   # UNIT TEST FOR METHOD search
+  def test_search
+    p = Prospector.new(1, 1, 1)
+    p.initial_vals
+    def p.get_rubies(c); [4, 2]; end
+    def p.print_rubies(r, f, c); 1; end
+    p.search('Pitt', 1)
+    assert_equal 4, p.real_ruby_count
+    assert_equal 2, p.fake_ruby_count
+    assert_equal 1, p.days
+  end
+    
 
   # UNIT TEST FOR METHOD day_form
   # Equivalence classes:
@@ -116,6 +142,8 @@ class ProspectorTest < Minitest::Test
     assert_equal y, 2
   end
 
+  # QUESTION 5 IN EMAIL
+  
   # UNIT TEST FOR METHOD print_rubies
   # Equivalence classes:
   # Note: [] indicates value of said variable
