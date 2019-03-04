@@ -19,7 +19,6 @@ class Prospector
     @real_ruby_count = 0
     @fake_ruby_count = 0
     @days = 0
-
     @current_location = 'Enumerable Canyon'
     @current_location_index = @l.get_location_index(@current_location)
     1

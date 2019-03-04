@@ -59,7 +59,6 @@ class ProspectorTest < Minitest::Test
   # x =0 -> method prints 'Going home empty-handed.'
 
   # If x >= 10, method prints 'Going home victorious!'
-  # EDGE CASE
   def test_mood_ten
     p = Prospector.new(1, 1, 1)
     assert_output ("Going home victorious!\n") {p.mood(10) }
