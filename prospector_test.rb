@@ -12,18 +12,15 @@ class ProspectorTest < Minitest::Test
     assert_equal 1, turn
   end
 
-  # QUESTION 1 IN EMAIL
-  
   #UNIT TEST FOR METHOD go_to_next_location_and_search
-  # method should take in next_location and return updated values of current_location and next_location
+  # method should take in next_location, and return updated values of current_location and next_location
   def test_go_to_next_location_and_search
     next_location = 'Pitt'
     p = Prospector.new(1, 1, 1)
-    p.initial_vals
+    p.l = MiniTest::Mock.new
     l = p.l
-    location = MiniTest::Mock.new
-    location.expect :get_location_index, nil, 1
-    location.expect :get_next_location, nil, 'CMU'
+    l.expect :get_location_index, 1, ['Pitt']
+    l.expect :get_next_location, 'CMU', [1]
     def p.search(current_location, current_location_index); 1; end
 
     current_location, next_location = p.go_to_next_location_and_search(next_location)
@@ -31,23 +28,22 @@ class ProspectorTest < Minitest::Test
     assert_equal next_location, 'CMU'
   end
 
-  # QUESTION 2 IN EMAIL
-  
   # UNIT TEST FOR METHOD print_output
   # Method uses prospector_num as the Rubyist # when printing
   def test_print_output
     p = Prospector.new(1, 1, 1)
     p.initial_vals
+    p.days = 10
+    p.real_ruby_count = 4
+    p.fake_ruby_count = 2
     def p.day_form(num); 'days'; end
     def p.ruby_form(num); 'rubies'; end
     def p.mood(real_ruby_count); 1; end
-    assert_output ("After 0 days, Rubyist 42 found:\n\t0 rubies.\n\t0 fake rubies.\n") {p.print_output(42) }
+    assert_output ("After 10 days, Rubyist 42 found:\n\t4 rubies.\n\t2 fake rubies.\n") {p.print_output(42) }
   end
 
-  # QUESTION 3 IN EMAL
-  
   # UNIT TEST FOR METHOD run_one_iteration
-  # what am i testing here aaaaa
+  # First puts prints with the correct prospector_num, and second puts inside the while loop puts with the correct locations
   def test_run_one_iteration
     p = Prospector.new(1, 1, 1)
     p.initial_vals
@@ -80,11 +76,10 @@ class ProspectorTest < Minitest::Test
     p = Prospector.new(1, 1, 1)
     assert_output ("Going home empty-handed.\n") {p.mood(0) }
   end
-
-  # QUESTION 4 IN EMAIL
-  
+ 
   # UNIT TEST FOR METHOD search
-  def test_search
+  # test whether instance variables of real_ruby_count and fake_ruby count are udpated correctly
+  def test_search_rubies
     p = Prospector.new(1, 1, 1)
     p.initial_vals
     def p.get_rubies(c); [4, 2]; end
@@ -92,9 +87,17 @@ class ProspectorTest < Minitest::Test
     p.search('Pitt', 1)
     assert_equal 4, p.real_ruby_count
     assert_equal 2, p.fake_ruby_count
+  end
+  
+  # test whether instance variable days is udpated correctly
+  def test_search_days
+    p = Prospector.new(1, 1, 1)
+    p.initial_vals
+    def p.get_rubies(c); [4, 2]; end
+    def p.print_rubies(r, f, c); 1; end
+    p.search('Pitt', 1)
     assert_equal 1, p.days
   end
-    
 
   # UNIT TEST FOR METHOD day_form
   # Equivalence classes:
@@ -142,8 +145,6 @@ class ProspectorTest < Minitest::Test
     assert_equal y, 2
   end
 
-  # QUESTION 5 IN EMAIL
-  
   # UNIT TEST FOR METHOD print_rubies
   # Equivalence classes:
   # Note: [] indicates value of said variable

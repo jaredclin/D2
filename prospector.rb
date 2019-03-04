@@ -2,10 +2,10 @@ require_relative 'location'
 
 # Prospector Class
 class Prospector
-  attr_reader :l
-  attr_reader :days
-  attr_reader :real_ruby_count
-  attr_reader :fake_ruby_count
+  attr_accessor :l
+  attr_accessor :days
+  attr_accessor :real_ruby_count
+  attr_accessor :fake_ruby_count
   attr_reader :current_location
 
   def initialize(seed, num_prospectors, num_turns)
